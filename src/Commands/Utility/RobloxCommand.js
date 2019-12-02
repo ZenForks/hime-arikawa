@@ -56,13 +56,6 @@ ${friendList.length > 5 ? `...and ${friendList.length - 5} more...` : ``}
                 `)
             
             message.channel.send(embed)
-        } else if (/popular/gi.exec(args.flag1) || /popular/gi.exec(args.flag)) {
-            const msg = await message.channel.send("Fetching games...");
-            const { body } = await get(GAME_URL);
-            const $ = await cheerio.load(body);
-            const popularGames = [];
-            const popularContainer = $('.hlist.games.game-cards').attr('class', 'list-item.game-card.game-tile')[0]
-            console.log(popularContainer);
         }
 	}
 }
