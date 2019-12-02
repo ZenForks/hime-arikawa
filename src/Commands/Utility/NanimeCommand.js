@@ -13,6 +13,7 @@ class NanimeCommand extends Command {
 	}
 
 	async exec(message) {
+    try {
         const msg = await message.channel.send("Fetching anime...")
         const { body } = await get(BASE_URL);
         const $ = await cheerio.load(body);
@@ -21,7 +22,7 @@ class NanimeCommand extends Command {
         const episodes = [];
         const images = [];
         const urls = [];
-        const urlAnimeElement = $(".col-md-3");
+        const urlAnimeElement = $(".content-item a");
         const statusElement = $(".status");
         const episodeElement = $(".episode");
         const titleElement = $(".post-title");
@@ -32,7 +33,7 @@ class NanimeCommand extends Command {
 
         urlAnimeElement.each((i, element) => {
             if (i > 11) return;
-            const urlText = $(element).attr("a href");
+            const urlText = $(element).attr("href");
             urls.push(`https://nanime.tv${urlText}`);
         });
 
@@ -109,7 +110,10 @@ Status      :: ${struct.status}
         }
         
         return awaitReaction();
-	}
+    } catch(e) {
+    return message.channel.send(`Oh, an error occured, please try again later :(\nERROR STACK :\n\`\`\`ini\n${e.stack}\`\`\``)
+  }
+  }
 }
 
 module.exports = NanimeCommand;
