@@ -26,7 +26,7 @@ class NekopoiCommand extends Command {
 	async exec(message, { content }) {
 		if (!message.channel.nsfw && message.member.permissions.has("MANAGE_CHANNELS") && message.guild.me.permissions.has("MANAGE_CHANNELS")) return this.client.utils.makeChoice(message.channel, message.author);
         content = content.split(" ");
-        if (/ongoing/gi.exec(content)) {
+        if (/ongoing/gi.exec(content)) { // eslint-disable-line
             
         }
 	}

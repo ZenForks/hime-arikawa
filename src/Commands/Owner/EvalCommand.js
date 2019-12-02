@@ -14,6 +14,15 @@ class EvalCommand extends Command {
 				{
 					id: 'code',
 					match: 'content'
+				},
+				{
+					id: "flag",
+					match: "option",
+					flag: ["-"]
+				}, {
+					id: "flag1",
+					match: "option",
+					flag: ["--"]
 				}
 			],
 			description: {
